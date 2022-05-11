@@ -166,10 +166,11 @@ $multi [$var1]$var2[$var3] = 2
 $stringArray = 'string' * 20
 #output: stringstringstringstringstringstringstringstring (x25)
 ```
+```powershell
 $stringarray= @('string',$null) * 20
 #prints 'string' 20 times on a newline each time
 [array]$notarray = @('string') * 20 
-
+```
 
 
 
