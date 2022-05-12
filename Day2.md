@@ -286,7 +286,7 @@ $line1,$line2 | foreach-object { if($_ -match "[A-Z]{2}[0-9]{4}") {$Matches.Valu
 ```
 ---
 ## Activity 
-### RETARDED ACTIVITY: Looping & Iteration
+### ACTIVITY: Looping & Iteration
 1. Part 1
   - Use an array to iterate and open the following
     - Notepad
@@ -315,13 +315,39 @@ $line1,$line2 | foreach-object { if($_ -match "[A-Z]{2}[0-9]{4}") {$Matches.Valu
     - The amount of memory assigned to the process
 
 ```powershell
-#This is about to be retarded
+#part 1
+#store elements in an array
+$procs = "notepad", "msedge", "mspaint"
+#iterate array to start processes
+$procs | ForEach-Object { Start-Process $_ }
+#query processes
+Get-Process
+#iterate array to stop processes
+$procs | ForEach-Object { Stop-Process $_ }
 
+#part2
+#Store elements in an array 
+$procs = "notepad", "msedge", "mspaint"
+#iterate array to start processes
+$procs | ForEach-Object { Start-Process $_ }
+$file = "pwd\procs.txt"
 
+foreach($proc in $procs){
+    get-process | where-object{$_.Name -like $proc} | `
+    For-Each-Object{Add-Content $file $_.Id} }
+#iterate through IDs in procs.txt to kill processes
+Get-Content .\procs.txt | ForEach-Object{Stop-Process -ProcessName $_}
 
-
-
-
-
-
+#part 3
+#store elements in an array
+$procs = "notepad", "msedge", "mspaint"
+#iterate array to start processes
+$procs | ForEach-Object { Start-Process $_ }
+#display required information acout specific processes
+foreach($proc in $procs) {
+    get-process | where-object{$_.Name -like $proc} | `
+    Format-Table -Property ID, name, starttime, totalprocessortime, `
+     virtualmemorysize, workingset64 }
 ```
+
+
