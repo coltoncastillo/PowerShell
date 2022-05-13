@@ -58,6 +58,13 @@ function q6 {
     $sum 
 }
 ```
+or
+```powershell
+$sum = 0 
+	foreach ( $element in $input) {
+	$sum += $element
+	$sum
+```
 Return only those commands whose noun is process
 ```powershell
 function q7 {
